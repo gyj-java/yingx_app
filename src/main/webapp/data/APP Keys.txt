@@ -1,0 +1,5 @@
+既可以发送消息或也可以订阅channel来接收消息
+Common key:BC-20905462639143a98df5fdbd74a82c9e
+
+只能用来订阅channel来接收消息
+Subscribe key:BS-a52a041ed6584aefae1ba78171e6b6cb

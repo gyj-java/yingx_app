@@ -1,0 +1,39 @@
+server:
+  port: 8989
+  servlet:
+    context-path: /yingx
+    jsp:
+      init-parameters:
+        development: true
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/yingx
+    username: root
+    password: 123
+    type: com.alibaba.druid.pool.DruidDataSource
+#  配置jsp识别
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+#  设置文件上传的大小
+  servlet:
+    multipart:
+#      单次上传
+      max-file-size: 500MB
+#      一次响应一共可以
+      max-request-size: 800MB
+
+# 配置redis
+  redis:
+    host: r-8vb9ebcda70b39f4pd.redis.zhangbei.rds.aliyuncs.com
+    port: 6379
+    database: 0
+    password: GuoYunJie05m
+
+
+mybatis:
+  type-aliases-package: com.gyj.yingx.entity
+  mapper-locations: classpath:com/gyj/mapper/*-mapper.xml
+

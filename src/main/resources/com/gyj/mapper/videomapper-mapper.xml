@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 
+	namespace: 指定当前mapper.xml管理的接口 全限定名
+	注意：一个mapper.xml只能管理一个接口
+-->
+<mapper namespace="com.gyj.yingx.dao.VideoMapper">
+
+    <cache type="com.gyj.yingx.cache.RedisCache"/>
+
+    <sql id="querySql">
+        c.cate_name cateName,
+        v.id id,v.title vTitle,v.brief vBrief,v.video_path vPath,v.cover_img vCover,v.publish_date vPublishDate,
+        u.head_img headImg
+    </sql>
+
+
+    <sql id="queryDetailSql">
+        v.id id,v.title vTitle,v.brief vBrief,v.video_path vPath,v.cover_img vCover,v.publish_date vPublishDate,
+        c.cate_name cateName,c.id categoryId,
+        u.head_img headImg,u.id userId, u.username userName
+        a.id isAttention
+    </sql>
+
+    <!--查询视频信息按时间排序-类别表 视频表 用户表  -->
+    <select id="queryByReleaseTime" resultType="com.gyj.yingx.po.VideoPo">
+        select
+        <include refid="querySql"/>
+        from yx_video v
+        left join yx_category c on v.category_id=c.id
+        left join yx_user u on v.user_id=u.id
+        order by v.publish_date desc
+    </select>
+
+    <select id="queryByLikeVideoName" resultType="com.gyj.yingx.po.VideoPo">
+        select
+        <include refid="querySql"/>
+        from yx_video v
+        left join yx_category c on v.category_id=c.id
+        left join yx_user u on v.user_id=u.id
+        where title like "%"#{content,jdbcType=VARCHAR}"%"
+        order by v.publish_date desc
+    </select>
+
+    <select id="queryByVideoDetail" resultType="com.gyj.yingx.po.VideoPo">
+        select
+         v.id id,v.title vTitle,v.brief vBrief,v.video_path vPath,v.cover_img vCover,v.publish_date vPublishDate,
+        c.cate_name cateName,c.id categoryId,
+        u.head_img headImg,u.id userId, u.username userName,
+        a.id isAttention
+        from yx_video v
+        left join yx_category c on v.category_id=c.id
+        left join yx_user u on v.user_id=u.id
+        left join yx_attention a on (u.id = a.attention_id and a.user_id =#{userId})
+        where v.id = #{videoId}
+    </select>
+
+    <select id="queryByCategory" resultType="com.gyj.yingx.po.VideoPo">
+        select
+         v.id id,v.title vTitle,v.brief vBrief,v.video_path vPath,v.cover_img vCover,v.publish_date vPublishDate,
+        c.cate_name cateName,c.id categoryId,
+        u.head_img headImg,u.id userId, u.username userName,
+        a.id isAttention
+        from yx_video v
+        left join yx_category c on v.category_id=c.id
+        left join yx_user u on v.user_id=u.id
+        left join yx_attention a on (u.id = a.attention_id and a.user_id =#{userId})
+        where v.category_id = #{categoryId}
+    </select>
+</mapper>
