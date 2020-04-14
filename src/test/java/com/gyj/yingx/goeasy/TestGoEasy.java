@@ -47,6 +47,8 @@ public class TestGoEasy {
                 e.printStackTrace();
             }
 
+            String sa;
+
         }
     }
 }
