@@ -18,8 +18,8 @@ public class AliyunOssUtil {
 
     private static String endpoint = "http://oss-cn-beijing.aliyuncs.com";
     // 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录 https://ram.console.aliyun.com 创建RAM账号。
-    private static String accessKeyId = "LTAI4FkCMSb1Aik5tgViAPRT";
-    private static String accessKeySecret = "XkJGvzX9UHaEpft02cboSH7crDfXdJ";
+    private static String accessKeyId = "*****";
+    private static String accessKeySecret = "*****";
 
     private static String bucket="yingx-gyj";
 
